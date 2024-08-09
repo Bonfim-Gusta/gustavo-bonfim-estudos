@@ -50,3 +50,18 @@ um pull request no GitHub.
 • Revise um pull request, aprove ou solicite mudanças, e faça o merge na 
 branch principal.
 OBS: Cada tópico vale um ponto. 
+
+
+Principais comandos aprendidos: 
+    - git add (nome do arquivo) / . (Adiciona os arquivos alterados para o staging)
+    - git commit -m "mensagem de commit"
+    - git commit -m "mensagem de commit" --amend (Não cria um novo commit, aplica as mudanças no ultimo commit criado)
+    - git commit -a -m "(mensagem de commit)" (Pula o staging)
+    - git status (Mostra os estados de cada arquivo)
+    - git log (Exibe informações de commit)
+    - git pull (Puxa os arquivos do repositório remoto para o local)
+    - git push (Envia as alterações do repositório local para o remoto)
+    - git branch (Exibe as branchs criadas)
+    - git branch *nome da branch* (Cria uma nova branch)
+    - git switch *nome da branch* (Altera para a branch desejada)
+    
