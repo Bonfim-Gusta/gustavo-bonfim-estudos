@@ -4,6 +4,7 @@ import boardgame.Board;
 import boardgame.Position;
 import chess.enums.Color;
 import chess.pieces.King;
+import chess.pieces.Rock;
 
 public class ChessMatch {
     private Board board;
@@ -24,7 +25,12 @@ public class ChessMatch {
         return mat;
     }
 
+    private void placeNewPiece(char column, int row, ChessPiece chessPiece){
+        board.placePiece(chessPiece, new ChessPosition(column, row).toPosition());
+    }
+
     private void initalSetup() {
-        board.placePiece(new King(board, Color.BLACK), new Position(2,1));
+        placeNewPiece('a', 5, new King(board, Color.BLACK));
+        placeNewPiece('b', 8, new Rock(board, Color.BLACK));
     }
 }
