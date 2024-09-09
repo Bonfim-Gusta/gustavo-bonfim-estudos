@@ -30,9 +30,21 @@ public class BookResource {
         return ResponseEntity.ok().body(book);
     }
 
-    @GetMapping(value = "/filter")
-    public ResponseEntity<List<Book>> findByAutor(@RequestParam(value = "autor", required = false) String autorBook){
+    @GetMapping(value = "/filterAutor")
+    public ResponseEntity<List<Book>> findByAutor(@RequestParam(value = "autor", required = false) @PathVariable String autorBook){
         List<Book> books = bookService.findByAutor(autorBook);
+        return ResponseEntity.ok().body(books);
+    }
+
+    @GetMapping(value = "/filterTitle")
+    public ResponseEntity<List<Book>> findByTitle(@RequestParam(value = "title", required = false) String title){
+        List<Book> books = bookService.findByTitle(title);
+        return ResponseEntity.ok().body(books);
+    }
+
+    @GetMapping(value = "/filterYearAfter")
+    public ResponseEntity<List<Book>> findByYearAfter(@RequestParam(value = "publicationYear", required = false) Integer year){
+        List<Book> books = bookService.findByYearAfter(year);
         return ResponseEntity.ok().body(books);
     }
 

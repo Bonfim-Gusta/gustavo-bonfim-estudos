@@ -3,6 +3,7 @@ package com.gustavo.semana_05.services;
 import com.gustavo.semana_05.entities.Book;
 import com.gustavo.semana_05.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,6 +28,28 @@ public class BookService {
         List<Book> list = new ArrayList<>();
         for (Book b : allBooks){
             if (b.getAutor().equals(autor)){
+                list.add(b);
+            }
+        }
+        return list;
+    }
+
+    public List<Book> findByTitle(String title){
+        List<Book> allBooks = findAll();
+        List<Book> list = new ArrayList<>();
+        for (Book b : allBooks){
+            if (b.getTitle().equals(title)){
+                list.add(b);
+            }
+        }
+        return list;
+    }
+
+    public List<Book> findByYearAfter(Integer year){
+        List<Book> allBooks = findAll();
+        List<Book> list = new ArrayList<>();
+        for (Book b : allBooks){
+            if (b.getPublicationYear() > year){
                 list.add(b);
             }
         }
