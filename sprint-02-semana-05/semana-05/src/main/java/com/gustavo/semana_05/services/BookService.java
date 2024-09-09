@@ -86,4 +86,12 @@ public class BookService {
             }
         }
     }
+
+    public void deleteByAutor(String autor){
+        for (Book b : findAll()){
+            if (b.getAutor().equals(autor)){
+                bookRepository.delete(b);
+            }
+        }
+    }
 }

@@ -72,10 +72,18 @@ public class BookResource {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/deleteTitle")
     public ResponseEntity<Book> deleteByTitle(@RequestParam(value = "title", required = false) String title){
 
         bookService.deleteByTitle(title);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/deleteAutor")
+    public ResponseEntity<Book> deleteByAutor(@RequestParam(value = "autor", required = false) String autor){
+
+        bookService.deleteByAutor(autor);
 
         return ResponseEntity.noContent().build();
     }
