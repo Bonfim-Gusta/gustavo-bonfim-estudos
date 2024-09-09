@@ -80,9 +80,8 @@ public class BookService {
     }
 
     public void deleteByTitle(String title){
-
         for (Book b : findAll()){
-            if (b.getTitle().replaceAll("\\s", "").equals(title.replaceAll("\\s", ""))){
+            if (b.getTitle().equals(title)){
                 bookRepository.delete(b);
             }
         }

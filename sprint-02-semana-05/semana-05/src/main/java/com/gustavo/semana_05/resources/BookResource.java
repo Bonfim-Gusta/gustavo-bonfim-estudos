@@ -72,8 +72,9 @@ public class BookResource {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(value = "/{title}")
-    public ResponseEntity<Book> deleteByTitle(@PathVariable String title){
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Book> deleteByTitle(@RequestParam(value = "title", required = false) String title){
+
         bookService.deleteByTitle(title);
 
         return ResponseEntity.noContent().build();
