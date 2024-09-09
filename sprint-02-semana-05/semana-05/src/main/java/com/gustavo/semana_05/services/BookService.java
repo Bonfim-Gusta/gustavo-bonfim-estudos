@@ -24,4 +24,18 @@ public class BookService {
     public Book insert(Book book){
         return bookRepository.save(book);
     }
+
+    public Book update(Book book){
+        Book bookToUpdate =  findById(book.getId());
+        updateData(bookToUpdate, book);
+
+        return bookRepository.save(bookToUpdate);
+    }
+
+    private void updateData(Book bookToUpdate, Book book) {
+        bookToUpdate.setTitle(book.getTitle());
+        bookToUpdate.setAutor(book.getAutor());
+        bookToUpdate.setPublicationYear(book.getPublicationYear());
+        bookToUpdate.setGenre(book.getGenre());
+    }
 }
