@@ -2,7 +2,9 @@ package com.gustavo.semana_05.services;
 
 import com.gustavo.semana_05.entities.Book;
 import com.gustavo.semana_05.repositories.BookRepository;
+import com.gustavo.semana_05.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +12,6 @@ import java.util.List;
 
 @Service
 public class BookService {
-
     @Autowired
     BookRepository bookRepository;
 
@@ -19,7 +20,8 @@ public class BookService {
     }
 
     public Book findById(String id){
-        return bookRepository.findById(id).orElseThrow();
+        return bookRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException
+                (String.format("No books were found based on this id %s", id)));
     }
 
     public List<Book> findByAutor(String autor){
@@ -30,6 +32,45 @@ public class BookService {
                 list.add(b);
             }
         }
+
+        if (list.isEmpty()){
+            throw new ObjectNotFoundException(
+                    String.format("No books were found based on this autor %s", autor));
+        }
+
+        return list;
+    }
+
+    public List<Book> findByTitle(String title){
+        List<Book> allBooks = findAll();
+        List<Book> list = new ArrayList<>();
+        for (Book b : allBooks){
+            if (b.getTitle().equals(title)){
+                list.add(b);
+            }
+        }
+        if (list.isEmpty()){
+            throw new ObjectNotFoundException(
+                    String.format("No books were found based on this title %s", title));
+        }
+
+        return list;
+    }
+
+    public List<Book> findByYearAfter(Integer year){
+        List<Book> allBooks = findAll();
+        List<Book> list = new ArrayList<>();
+        for (Book b : allBooks){
+            if (b.getPublicationYear() > year){
+                list.add(b);
+            }
+        }
+
+        if (list.isEmpty()){
+            throw new ObjectNotFoundException(
+                    String.format("No books were found with date of publication after %d", year));
+        }
+
         return list;
     }
 
@@ -57,11 +98,32 @@ public class BookService {
     }
 
     public void deleteByTitle(String title){
-
+        Book book = null;
         for (Book b : findAll()){
-            if (b.getTitle().replaceAll("\\s", "").equals(title.replaceAll("\\s", ""))){
-                bookRepository.delete(b);
+            if (b.getTitle().equals(title)){
+                book = b;
+                bookRepository.delete(book);
             }
+        }
+
+        if (book == null){
+            throw new ObjectNotFoundException(
+                    String.format("No books were found based on this title %s", title));
+        }
+    }
+
+    public void deleteByAutor(String autor){
+        Book book = null;
+        for (Book b : findAll()){
+            if (b.getAutor().equals(autor)){
+                book = b;
+                bookRepository.delete(book);
+            }
+        }
+
+        if (book == null){
+            throw new ObjectNotFoundException(
+                    String.format("No books were found based on this title %s", autor));
         }
     }
 }
