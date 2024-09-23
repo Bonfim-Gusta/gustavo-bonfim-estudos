@@ -1,4 +1,4 @@
-package com.atividadesPB.api_rest_semana07.dto;
+package com.atividadesPB.api_rest_semana07.service.dto;
 
 import lombok.*;
 
